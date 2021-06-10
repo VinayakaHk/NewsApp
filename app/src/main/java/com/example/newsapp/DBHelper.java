@@ -1,6 +1,7 @@
 package com.example.newsapp;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,7 +11,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DBName = "Login.db";
 
-    public DBHelper(View.OnClickListener context) {
+    public DBHelper(Context context) {
         super(context,"Login.db",null,1);
 
     }

@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         username1 =(EditText) findViewById(R.id.username1);
         password1 = (EditText) findViewById(R.id.password1);
         signin1 = (Button) findViewById(R.id.btnsignin1);
-        DB = new DBHelper((View.OnClickListener) this);
+        DB = new DBHelper(this);
 
 
 
@@ -44,12 +44,14 @@ public class LoginActivity extends AppCompatActivity {
                     if(checkpass== true)
                     {
                         Toast.makeText(LoginActivity.this, "Sign in Successful", Toast.LENGTH_LONG).show();
-                        Intent intent2 = new Intent(getApplicationContext(),MainActivity.class);
+                        Intent intent2 = new Intent(getApplicationContext(),HomeActivity.class);
                         startActivity(intent2);
 
                     }
-                    else
+                    else {
                         Toast.makeText(LoginActivity.this, "Credentials incorret", Toast.LENGTH_LONG).show();
+
+                    }
                 }
 
             }
