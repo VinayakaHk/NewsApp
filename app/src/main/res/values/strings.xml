@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="https_newsapi_org_n_https_square_github_io_retrofit_n_https_material_io_design_n_http_www_ocpsoft_org_prettytime">https://newsapi.org\n https://square.github.io/retrofit\n https://material.io/design\n http://www.ocpsoft.org/prettytime</string>
+    <string name="description">Description</string>
+</resources>
