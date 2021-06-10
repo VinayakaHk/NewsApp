@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/news"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/news_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/g_bold"
+        android:textColor="@color/grey"
+        android:textColorHint="@color/grey"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:text="@string/news_app_login"/>
+
+    <EditText
+        android:id="@+id/username1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/g_light"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:padding="10dp"
+        android:hint="@string/user_name"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/news_title"
+
+        />
+    <EditText
+        android:id="@+id/password1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/g_light"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:padding="10dp"
+        android:hint="@string/password"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/username1"
+        />
+    <Button
+        android:id="@+id/btnsignin1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/g_bold"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        android:padding="10dp"
+        android:text="@string/sign_in"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/password1"
+        android:layout_centerHorizontal="true"
+        tools:ignore="NotSibling" />
+</RelativeLayout>

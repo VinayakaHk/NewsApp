@@ -2,4 +2,11 @@
     <string name="app_name">NewsApp</string>
     <string name="https_newsapi_org_n_https_square_github_io_retrofit_n_https_material_io_design_n_http_www_ocpsoft_org_prettytime">https://newsapi.org\n https://square.github.io/retrofit\n https://material.io/design\n http://www.ocpsoft.org/prettytime</string>
     <string name="description">Description</string>
+    <string name="user_name">User name</string>
+    <string name="password">Password</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="register">Register</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="news_app_register">News App | Register</string>
+    <string name="news_app_login">News App | Login</string>
 </resources>

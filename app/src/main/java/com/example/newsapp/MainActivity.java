@@ -1,140 +1,75 @@
 package com.example.newsapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.app.Dialog;
+import android.app.AppComponentFactory;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.newsapp.Model.ApiClient;
-import com.example.newsapp.Model.Articles;
-import com.example.newsapp.Model.Headlines;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    EditText username, password, repassword;
+    Button signup, signin;
+    DBHelper DB;
 
-    RecyclerView recyclerView;
-    SwipeRefreshLayout swipeRefreshLayout;
-    EditText etQuery;
-    Button btnSearch,btnAboutUs;
-    Dialog dialog;
-    final String API_KEY = "e35e8615714048f1a297be3deab00eec";
-    Adapter adapter;
-    List<Articles>  articles = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
-        recyclerView = findViewById(R.id.recyclerView);
-
-        etQuery = findViewById(R.id.etQuery);
-        btnSearch = findViewById(R.id.btnSearch);
-        btnAboutUs = findViewById(R.id.aboutUs);
-        dialog = new Dialog(MainActivity.this);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        final String country = getCountry();
+        setContentView(R.layout.register);
+        username=(EditText) findViewById(R.id.username);
+        password=(EditText) findViewById(R.id.password);
+        repassword= (EditText) findViewById(R.id.repass);
+        signup = (Button) findViewById(R.id.btnsignup);
+        signin = (Button) findViewById(R.id.btnsignin);
+        DB = new DBHelper((View.OnClickListener) this);
 
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                retrieveJson("",country,API_KEY);
-            }
-        });
-        retrieveJson("",country,API_KEY);
 
-        btnSearch.setOnClickListener(new View.OnClickListener() {
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!etQuery.getText().toString().equals("")){
-                    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                        @Override
-                        public void onRefresh() {
-                            retrieveJson(etQuery.getText().toString(),country,API_KEY);
-                        }
-                    });
-                    retrieveJson(etQuery.getText().toString(),country,API_KEY);
-                }else{
-                    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                        @Override
-                        public void onRefresh() {
-                            retrieveJson("",country,API_KEY);
-                        }
-                    });
-                    retrieveJson("",country,API_KEY);
+                String user = username.getText().toString();
+                String pass = password.getText().toString();
+                String repass = repassword.getText().toString();
+                if (user.equals("") || pass.equals("") || repass.equals(""))
+                {
+                    Toast.makeText(MainActivity.this, "You have left it blank" ,Toast.LENGTH_LONG).show();
                 }
-            }
-        });
-
-        btnAboutUs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        });
-    }
-    public void retrieveJson(String query ,String country, String apiKey){
-        swipeRefreshLayout.setRefreshing(true);
-        Call<Headlines> call;
-        if (!etQuery.getText().toString().equals("")){
-            call= ApiClient.getInstance().getApi().getSpecificData(query,apiKey);
-        }else{
-            call= ApiClient.getInstance().getApi().getHeadlines(country,apiKey);
-        }
-
-        call.enqueue(new Callback<Headlines>() {
-            @Override
-            public void onResponse(Call<Headlines> call, Response<Headlines> response) {
-                if (response.isSuccessful() && response.body().getArticles() != null){
-                    swipeRefreshLayout.setRefreshing(false);
-                    articles.clear();
-                    articles = response.body().getArticles();
-                    adapter = new Adapter(MainActivity.this,articles);
-                    recyclerView.setAdapter(adapter);
+                else
+                {
+                    if(pass.equals(repass))
+                    {
+                        Boolean checkuser = DB.checkUsername(user);
+                        if(checkuser ==false)
+                        {
+                            Boolean insert = DB.insertData(user,pass);
+                            if(insert == true)
+                            {
+                                Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                            else
+                                Toast.makeText(MainActivity.this, "Registration Failed. DB Error ", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                            Toast.makeText(MainActivity.this, "User already exists.", Toast.LENGTH_LONG).show();
+                    }
+                    else
+                        Toast.makeText(MainActivity.this, "Passwords not matching", Toast.LENGTH_LONG).show();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Headlines> call, Throwable t) {
-                swipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(MainActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public String getCountry(){
-        Locale locale = Locale.getDefault();
-        String country = locale.getCountry();
-        return country.toLowerCase();
-    }
-
-    public void showDialog(){
-        Button btnClose;
-        dialog.setContentView(R.layout.about_us_pop_up);
-        dialog.show();
-        btnClose = dialog.findViewById(R.id.close);
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
+        signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

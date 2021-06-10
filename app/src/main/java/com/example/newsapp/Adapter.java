@@ -64,6 +64,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,Detailed.class);
+                intent.putExtra("country",a.getCountry());
                 intent.putExtra("title",a.getTitle());
                 intent.putExtra("source",a.getSource().getName());
                 intent.putExtra("time",dateTime(a.getPublishedAt()));

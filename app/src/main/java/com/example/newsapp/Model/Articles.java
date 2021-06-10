@@ -5,6 +5,12 @@ import com.google.gson.annotations.SerializedName;
 public class Articles {
 
 
+
+    @SerializedName("country")
+    @Expose
+    private String country;
+
+
     @SerializedName("source")
     @Expose
     private Source source;
@@ -41,7 +47,13 @@ public class Articles {
     @Expose
     private String publishedAt;
 
+    public String getCountry() {
+        return country;
+    }
 
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     public Source getSource() {
         return source;
@@ -90,4 +102,6 @@ public class Articles {
     public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }
+
+
 }

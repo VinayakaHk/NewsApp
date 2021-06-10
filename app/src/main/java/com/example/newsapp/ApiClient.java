@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "https://newsapi.org/v2/";
+    private static final String BASE_URL = "https://newsapi.org/v2/top-headlines?country=in/";
     private static ApiClient apiClient;
     private static Retrofit retrofit;
 
