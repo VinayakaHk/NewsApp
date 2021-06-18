@@ -41,7 +41,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
+
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
     EditText etQuery;
