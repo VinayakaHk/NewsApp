@@ -18,7 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        MyDB.execSQL("create table users(username TEXT primary key, password TEXT)");
+        MyDB.execSQL("create table users(username TEXT primary key, password TEXT,url TEXT, title TEXT)");
 
     }
 
@@ -64,6 +64,18 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         else
             return false;
+    }
+    public Boolean insertArt(String url, String title)
+    {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("url",url);
+        contentValues.put("title",title);
+        long result = MyDB.insert("users",null,contentValues);
+        if (result == -1)
+            return false;
+        else
+            return true;
     }
 
 }

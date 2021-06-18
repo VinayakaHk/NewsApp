@@ -4,6 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Articles {
 
+    @SerializedName("category")
+    @Expose
+    private String category;
+
 
 
     @SerializedName("country")
@@ -46,6 +50,14 @@ public class Articles {
     @SerializedName("publishedAt")
     @Expose
     private String publishedAt;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getCountry() {
         return country;

@@ -2,6 +2,7 @@ package com.example.newsapp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newsapp.Model.Articles;
-import com.example.newsapp.Model.Source;
 import com.squareup.picasso.Picasso;
 
 import org.ocpsoft.prettytime.PrettyTime;
-import org.ocpsoft.prettytime.format.SimpleTimeFormat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -118,5 +118,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         Locale locale = Locale.getDefault();
         String country = locale.getCountry();
         return country.toLowerCase();
+    }
+
+    public static class RecentActivity extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_login);
+
+        }
+
     }
 }
